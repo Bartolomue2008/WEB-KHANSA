@@ -1,7 +1,7 @@
 <?php
 // Memulai session agar status login terbaca
 session_start();
-include 'Config.php';
+include 'config.php';
 
 // Pastikan yang mengakses sudah login
 if (!isset($_SESSION['login'])) {

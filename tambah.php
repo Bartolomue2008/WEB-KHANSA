@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'Config.php';
+include 'config.php';
 
 // Proteksi halaman: Jika belum login, kembalikan ke login.php
 if (!isset($_SESSION['login'])) { 

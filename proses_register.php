@@ -1,5 +1,5 @@
 <?php
-include 'Config.php';
+include 'config.php';
 
 if (isset($_POST['register'])) {
     $username       = mysqli_real_escape_string($koneksi, $_POST['username']); 
