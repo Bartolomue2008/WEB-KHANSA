@@ -1,9 +1,13 @@
 <?php
+// Taruh di paling atas untuk mendeteksi error sejak awal
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Memulai session untuk mendeteksi status login
 session_start();
 
-// Mengambil file konfigurasi database
-include 'koneksi.php';
+// Mengambil file konfigurasi database (menggunakan huruf kecil)
+include 'config.php';
 
 // Proteksi halaman: Jika belum login atau session user kosong, tendang balik ke form login
 if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
@@ -11,14 +15,6 @@ if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
     exit();
 }
 ?>
-
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-
-// ... kode kamu selanjutnya di bawah sini ...
-
 <!DOCTYPE html>
 <html lang="id">
 <head>

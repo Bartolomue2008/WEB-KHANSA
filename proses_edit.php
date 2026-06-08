@@ -1,6 +1,16 @@
 <?php
-include 'Config.php';
-if (!isset($_SESSION['login'])) { header("Location: Login.php"); exit; }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// WAJIB jalankan session_start()
+session_start();
+
+include 'config.php';
+
+if (!isset($_SESSION['login'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
@@ -9,7 +19,8 @@ if (isset($_POST['update'])) {
 
     $query = "UPDATE barang SET nama='$nama', keterangan='$keterangan' WHERE id=$id";
     if (mysqli_query($koneksi, $query)) {
-        header("Location: Beranda.php");
+        header("Location: beranda.php");
+        exit;
     } else {
         echo "Gagal mengupdate data: " . mysqli_error($koneksi);
     }

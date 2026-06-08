@@ -1,12 +1,12 @@
 <?php
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_crud"; // Nama database sesuai dump users.sql kamu
+$user = "2526_12";
+$pass = "12345678";
+$db   = "2526_12db"; // Nama database server kamu
 
 $koneksi = mysqli_connect($host, $user, $pass, $db);
 
 if (!$koneksi) {
-    die("Koneksi database ke db_crud gagal: " . mysqli_connect_error());
+    die("Koneksi database gagal: " . mysqli_connect_error());
 }
 ?>
