@@ -12,6 +12,13 @@ if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
 }
 ?>
 
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+// ... kode kamu selanjutnya di bawah sini ...
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
