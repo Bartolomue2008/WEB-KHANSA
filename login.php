@@ -2,24 +2,50 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Login Sistem</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SMKN 2 Baleendah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #1b5e20; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .login-card { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-top: 5px solid #2e7d32; text-align: center; }
+        h2 { color: #1b5e20; font-size: 24px; margin-bottom: 8px; font-weight: 600; }
+        p { color: #666; font-size: 14px; margin-bottom: 24px; }
+        .form-group { text-align: left; margin-bottom: 18px; }
+        label { display: block; font-size: 13px; color: #1b5e20; font-weight: 600; margin-bottom: 6px; }
+        .form-control { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; outline: none; font-size: 14px; transition: 0.3s; }
+        .form-control:focus { border-color: #2e7d32; box-shadow: 0 0 8px rgba(46,125,50,0.2); }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 999px; background: #2e7d32; color: white; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn:hover { background: #1b5e20; transform: translateY(-2px); }
+        .register-link { margin-top: 20px; font-size: 13px; color: #555; }
+        .register-link a { color: #2e7d32; text-decoration: none; font-weight: 600; }
+        .register-link a:hover { text-decoration: underline; }
+    </style>
 </head>
-<body class="bg-green-50 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96 border-t-4 border-green-400">
-        <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Masuk ke Website</h2>
-        <form action="Proses_login.php" method="POST" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 text-sm font-semibold mb-1">Username</label>
-                <input type="text" name="username" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300">
-            </div>
-            <div>
-                <label class="block text-gray-700 text-sm font-semibold mb-1">Password</label>
-                <input type="password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300">
-            </div>
-            <button type="submit" name="login" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-md transition duration-200">Login</button>
-        </form>
-        <p class="text-sm text-center text-gray-600 mt-4">Belum punya akun? <a href="Registrasi.php" class="text-green-600 hover:underline">Daftar sekarang</a></p>
+<body>
+
+<div class="login-card">
+    <h2>SMKN 2 Baleendah</h2>
+    <p>Masuk ke Sistem Data Pengurus Kuliner</p>
+    
+    <form action="proses_login.php" method="POST">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" placeholder="Masukkan username" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+        </div>
+        <button type="submit" class="btn">Masuk Ke Sistem</button>
+    </form>
+    
+    <div class="register-link">
+        Belum punya akun? <a href="register.php">Daftar Akun Baru</a>
     </div>
+</div>
+
 </body>
 </html>

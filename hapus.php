@@ -1,17 +1,12 @@
 <?php
+session_start();
 include 'Config.php';
-if (!isset($_SESSION['login'])) { header("Location: Login.php"); exit; }
-
+if (!isset($_SESSION['login'])) { header("Location: login.php"); exit; }
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $query = "DELETE FROM barang WHERE id=$id";
-    
-    if (mysqli_query($koneksi, $query)) {
-        header("Location: Beranda.php");
-    } else {
-        echo "Gagal menghapus data: " . mysqli_error($koneksi);
+    $id = mysqli_real_escape_string($koneksi, $_GET['id']);
+    if (mysqli_query($koneksi, "DELETE FROM prestasi WHERE id='$id'")) {
+        header("Location: beranda.php");
+        exit;
     }
-} else {
-    header("Location: Beranda.php");
 }
 ?>

@@ -1,26 +1,30 @@
 <?php
-include 'Config.php'; // Config.php sudah otomatis menjalankan session_start() dan include koneksi
+session_start();
+include 'Config.php'; 
 
-$username = $_POST['username'];
-$pass     = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $pass     = $_POST['password'];
 
-// Format enkripsi MD5 sesuai keinginanmu
-$pass_hash = md5($pass);
+    $username_aman = mysqli_real_escape_string($koneksi, $username);
+    $pass_hash = md5($pass);
 
-$username_aman = mysqli_real_escape_string($koneksi, $username);
-$data = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username_aman' AND password='$pass_hash'");
+    $data = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username_aman' AND password='$pass_hash'");
 
-$d = mysqli_fetch_array($data);
-
-if ($d) {
-    $_SESSION['login']    = true; // Tambahkan ini agar lolos pengecekan halaman beranda
-    $_SESSION['id']       = $d['id'];
-    $_SESSION['username'] = $d['username'];
-    $_SESSION['role']     = $d['role'];
-    
-    header("location:Beranda.php"); // Diarahkan ke Beranda.php sesuai file yang kamu miliki
-    exit;
+    if (mysqli_num_rows($data) > 0) {
+        $d = mysqli_fetch_array($data);
+        
+        $_SESSION['login'] = true;
+        $_SESSION['user']  = $d['username']; 
+        
+        header("Location: beranda.php");
+        exit;
+    } else {
+        echo "<script>alert('Username atau password salah!'); window.location='login.php';</script>";
+        exit;
+    }
 } else {
-    echo "<script>alert('Username atau password salah!'); window.history.back();</script>";
+    header("Location: login.php");
+    exit;
 }
 ?>

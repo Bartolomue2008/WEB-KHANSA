@@ -1,43 +1,36 @@
 <?php
+session_start();
 include 'Config.php';
-if (!isset($_SESSION['login'])) { header("Location: Login.php"); exit; }
 
-if (isset($_POST['tambah'])) {
-    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
-    $keterangan = mysqli_real_escape_string($koneksi, $_POST['keterangan']);
+// Proteksi halaman: Jika belum login, kembalikan ke login.php
+if (!isset($_SESSION['login'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
 
-    $query = "INSERT INTO barang (nama, keterangan) VALUES ('$nama', '$keterangan')";
+if (isset($_POST['submit_tambah'])) {
+    // 1. Ambil data murni menggunakan NIP dari form input beranda
+    $nip        = mysqli_real_escape_string($koneksi, $_POST['nip']);
+    $nama       = mysqli_real_escape_string($koneksi, $_POST['nama']);
+    $kelas      = mysqli_real_escape_string($koneksi, $_POST['kelas']);
+    $wali_kelas = mysqli_real_escape_string($koneksi, $_POST['wali_kelas']);
+    $jabatan    = mysqli_real_escape_string($koneksi, $_POST['jabatan']);
+
+    // 2. SOLUSI PASTI: Memasukkan ke kolom database murni menggunakan (nip, nama, kelas, wali_kelas, jabatan)
+    // Kata 'nis' di baris ini sudah dihapus total agar tidak memicu error database lagi
+    $query = "INSERT INTO prestasi (nip, nama, kelas, wali_kelas, jabatan) VALUES ('$nip', '$nama', '$kelas', '$wali_kelas', '$jabatan')";
+    
     if (mysqli_query($koneksi, $query)) {
-        header("Location: Beranda.php");
+        echo "<script>
+                alert('Data pengurus berhasil ditambahkan!');
+                window.location='beranda.php';
+              </script>";
+        exit;
     } else {
-        echo "Gagal tambah data: " . mysqli_error($koneksi);
+        echo "Gagal menambah data: " . mysqli_error($koneksi);
     }
+} else {
+    header("Location: beranda.php");
+    exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Data</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96 border-t-4 border-green-400">
-        <h2 class="text-2xl font-bold text-green-700 mb-6">Tambah Data Baru</h2>
-        <form action="" method="POST" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 text-sm font-semibold mb-1">Nama Item</label>
-                <input type="text" name="nama" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300">
-            </div>
-            <div>
-                <label class="block text-gray-700 text-sm font-semibold mb-1">Keterangan</label>
-                <textarea name="keterangan" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"></textarea>
-            </div>
-            <div class="flex space-x-2">
-                <button type="submit" name="tambah" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-md transition">Simpan</button>
-                <a href="Beranda.php" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-700 text-center font-bold py-2 rounded-md transition flex items-center justify-center">Batal</a>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
