@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_crud"; // Ganti dengan nama database kamu
+$user = "2526_12";
+$pass = "12345678";
+$db   = "2526_12db"; // Ganti dengan nama database kamu
 
 $koneksi = mysqli_connect($host, $user, $pass, $db);
 
