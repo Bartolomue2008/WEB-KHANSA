@@ -2,9 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// WAJIB jalankan session_start()
 session_start();
-
 include 'config.php';
 
 if (!isset($_SESSION['login'])) { 
@@ -17,6 +15,7 @@ if (isset($_POST['update'])) {
     $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
     $keterangan = mysqli_real_escape_string($koneksi, $_POST['keterangan']);
 
+    // Mengubah data barang sesuai target form edit kamu
     $query = "UPDATE barang SET nama='$nama', keterangan='$keterangan' WHERE id=$id";
     if (mysqli_query($koneksi, $query)) {
         header("Location: beranda.php");

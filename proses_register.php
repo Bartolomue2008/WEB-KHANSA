@@ -10,7 +10,6 @@ if (isset($_POST['register'])) {
     $gender         = mysqli_real_escape_string($koneksi, $_POST['gender'] ?? '');
     $role           = mysqli_real_escape_string($koneksi, $_POST['role'] ?? 'user');
     
-    // Enkripsi MD5 agar sinkron dengan proses login
     $password_md5 = md5($password);
 
     $cek_user = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username'");
@@ -22,14 +21,11 @@ if (isset($_POST['register'])) {
                   VALUES ('$username', '$email', '$password_md5', '$nama_lengkap', '$kelas', '$gender', '$role')";
                   
         if (mysqli_query($koneksi, $query)) {
-            echo "<script>alert('Registrasi Berhasil! Silakan Login.'); window.location='Login.php';</script>";
+            echo "<script>alert('Registrasi Berhasil!'); window.location='login.php';</script>";
             exit;
         } else {
-            echo "Gagal Registrasi: " . mysqli_error($koneksi);
+            echo "Gagal: " . mysqli_error($koneksi);
         }
     }
-} else {
-    header("Location: register.php");
-    exit;
 }
 ?>

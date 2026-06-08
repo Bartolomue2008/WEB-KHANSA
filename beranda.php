@@ -1,15 +1,15 @@
 <?php
-// Taruh di paling atas untuk mendeteksi error sejak awal
+// 1. Paling atas: Aktifkan error reporting agar jika ada kendala langsung muncul teks erornya
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Memulai session untuk mendeteksi status login
+// 2. Memulai session untuk mendeteksi status login
 session_start();
 
-// Mengambil file konfigurasi database (menggunakan huruf kecil)
+// 3. Mengambil file konfigurasi database (Menggunakan huruf kecil sesuai nama file asli)
 include 'config.php';
 
-// Proteksi halaman: Jika belum login atau session user kosong, tendang balik ke form login
+// 4. Proteksi halaman: Jika belum login atau session user kosong, tendang balik ke form login
 if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
@@ -41,7 +41,7 @@ if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
     .profile-menu p { font-size: 13px; color: #1b5e20; word-break: break-word; }
     .logout-btn { padding: 10px 16px; border: none; border-radius: 999px; background: #d32f2f; color: white; cursor: pointer; transition: 0.3s; font-weight: 600; }
     .logout-btn:hover { background: #b71c1c; }
-    .hero { min-height: 85vh; padding: 0 60px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(27, 94, 32, 0.9)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836'); background-size: cover; background-position: center; }
+    .hero { min-height: 85vh; padding: 0 60px; display: flex; flex-gradient: column; justify-content: center; background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(27, 94, 32, 0.9)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836'); background-size: cover; background-position: center; display: flex; flex-direction: column;}
     .hero h2 { font-size: 52px; font-weight: 600; margin-bottom: 12px; color: #1b5e20; }
     .hero p { max-width: 600px; font-size: 16px; color: #ffffff; margin-bottom: 36px; }
     .btn { width: fit-content; padding: 14px 32px; border-radius: 999px; background: #2e7d32; color: white; font-size: 14px; transition: 0.3s; font-weight: 600; border: none; cursor: pointer; display: inline-block; text-align: center; }
@@ -149,7 +149,6 @@ if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
   </div>
 
   <?php
-  // Mengambil data real-time dari tabel prestasi
   $result = mysqli_query($koneksi, "SELECT * FROM prestasi ORDER BY id DESC");
   ?>
 
@@ -158,7 +157,7 @@ if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
       <thead>
         <tr>
           <th>No</th>
-          <th>NIS</th>
+          <th>NIS/NIP</th>
           <th>Nama Lengkap</th>
           <th>Kelas</th>
           <th>Jabatan</th>
@@ -199,8 +198,8 @@ if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
 
   <div style="margin-top:40px;" class="card">
     <h3 style="margin-bottom:15px;">Tambah Data Pengurus</h3>
-    <form action="tambah.php" method="POST">
-      <input type="text" name="nip" placeholder="Masukkan NIP" required class="form-control-custom">
+    <form action="proses_tambah.php" method="POST">
+      <input type="text" name="nip" placeholder="Masukkan NIS/NIP" required class="form-control-custom">
       <input type="text" name="nama" placeholder="Nama Lengkap" required class="form-control-custom">
       <input type="text" name="kelas" placeholder="Kelas" required class="form-control-custom">
       <input type="text" name="jabatan" placeholder="Jabatan" required class="form-control-custom">
