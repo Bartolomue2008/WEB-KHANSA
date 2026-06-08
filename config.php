@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$user = "2526_12"; // Sesuaikan dengan user hosting kamu jika di-online-kan
-$pass = "12345678";     // Sesuaikan dengan password hosting kamu jika di-online-kan
+$user = "root"; // Sesuaikan dengan user hosting kamu jika di-online-kan
+$pass = "";     // Sesuaikan dengan password hosting kamu jika di-online-kan
 $db   = "2526_12db"; 
 
 $koneksi = mysqli_connect($host, $user, $pass, $db);
