@@ -12,6 +12,7 @@ if (isset($_POST['register'])) {
     if (empty($username) || empty($password) || empty($konfirmasi_password)) {
         $pesan = "<div style='color: #d32f2f; background: #ffebee; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-size: 14px;'>Semua data wajib diisi!</div>";
     } else {
+        // Cek apakah username sudah digunakan
         $cek_user = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
         
         if (mysqli_num_rows($cek_user) > 0) {
@@ -21,13 +22,16 @@ if (isset($_POST['register'])) {
                 $pesan = "<div style='color: #d32f2f; background: #ffebee; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-size: 14px;'>Konfirmasi password tidak cocok!</div>";
             } else {
                 $password_md5 = md5($password);
-                $query = "INSERT INTO users (username, password, role) VALUES ('$username', '$password_md5', 'user')";
+                
+                // PERBAIKAN UTAMA: Menghapus kolom 'role' agar tidak bentrok dengan struktur database dasar
+                $query = "INSERT INTO users (username, password) VALUES ('$username', '$password_md5')";
                 
                 if (mysqli_query($koneksi, $query)) {
-                    echo "<script>alert('Pendaftaran berhasil! Silakan login.'); window.location='login.php';</script>";
+                    echo "<script>alert('Pendaftaran berhasil! Silakan login dengan akun baru Anda.'); window.location='login.php';</script>";
                     exit;
                 } else {
-                    $pesan = "<div style='color: #d32f2f; background: #ffebee; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-size: 14px;'>Gagal menyimpan data!</div>";
+                    // JIKA MASIH GAGAL: Kode di bawah ini akan memuntahkan pesan error asli dari MySQL
+                    $pesan = "<div style='color: #d32f2f; background: #ffebee; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-size: 14px;'>Gagal menyimpan data ke database. Error: " . mysqli_error($koneksi) . "</div>";
                 }
             }
         }
