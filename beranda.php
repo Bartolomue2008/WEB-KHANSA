@@ -3,7 +3,7 @@
 session_start();
 
 // Mengambil file konfigurasi database
-include 'config.php';
+include 'koneksi.php';
 
 // Proteksi halaman: Jika belum login atau session user kosong, tendang balik ke form login
 if (!isset($_SESSION['login']) || !isset($_SESSION['user'])) {
